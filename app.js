@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const User = require("./model/user");
 const app = express();
 const jwt = require("jsonwebtoken");
+const auth = require("./middleware/auth");
 
 app.use(express.json());
 
@@ -83,7 +84,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", auth, (req, res) => {
   res.status(200).send("Welcome to secret information");
 });
 
